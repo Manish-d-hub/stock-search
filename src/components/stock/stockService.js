@@ -7,7 +7,6 @@ export const getOneStock = async (symbol) => {
   const askedStock = await Stock.findOne({ name: symbol });
 
   if (!askedStock) {
-    console.log('.....Stock not found.....');
     let weeklyData = [];
     const apiRes = await axios({
       method: 'GET',
@@ -32,7 +31,6 @@ export const getOneStock = async (symbol) => {
     return currStock;
   }
 
-  console.log('.....Stock found.....');
   return askedStock;
 };
 
@@ -52,7 +50,6 @@ export const upadteDbStocks = async () => {
     });
 
     const stockPrice = apiRes.data['Global Quote']['05. price'];
-    console.log(stockPrice);
     weeklyData.pop();
     weeklyData.unshift(stockPrice);
 
