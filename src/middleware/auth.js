@@ -68,3 +68,12 @@ export const protectRoute = catchAsync(async (req, res, next) => {
   res.locals.user = currUser;
   next();
 });
+
+export const authorizeTo =
+  (...role) =>
+  (req, res, next) => {
+    if (!role.includes(req.user.role)) {
+      throw new AppError('You are not authorized to perfrom this action', 403);
+    }
+    next();
+  };
