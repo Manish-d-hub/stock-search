@@ -11,8 +11,8 @@ export const renderRegister = (req, res) => {
 
 export const createUser = catchAsync(async (req, res) => {
   logger.info('inside createUser controller');
-  const { email, password, passwordConfirm } = req.body;
-  const newUser = await createOneUser(email, password, passwordConfirm);
+  const { email, password, passwordConfirm, role } = req.body;
+  const newUser = await createOneUser(email, password, passwordConfirm, role);
 
   if (newUser.err) throw new AppError(newUser.err, newUser.statusCode);
 

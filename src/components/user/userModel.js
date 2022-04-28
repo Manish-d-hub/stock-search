@@ -29,7 +29,7 @@ const userSchema = new Schema(
         message: "Passwords didn't match",
       },
     },
-    role: { type: String, default: 'user', enum: ['user', 'admin'] },
+    role: { type: String, enum: ['admin', 'user'], default: 'user' },
     active: { type: Boolean, default: true, select: false },
   },
   { timestamps: true }
