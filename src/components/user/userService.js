@@ -1,7 +1,7 @@
 import logger from '../../middleware/logger.js';
 import User from './userModel.js';
 
-export const createOneUser = async (email, password, passwordConfirm) => {
+export const createOneUser = async (email, password, passwordConfirm, role) => {
   logger.info('Inside createOneUser service');
 
   const existigUser = await User.findOne({ email });
@@ -11,7 +11,7 @@ export const createOneUser = async (email, password, passwordConfirm) => {
       statusCode: 400,
     };
 
-  const newUser = await User.create({ email, password, passwordConfirm });
+  const newUser = await User.create({ email, password, passwordConfirm, role });
   return newUser;
 };
 
