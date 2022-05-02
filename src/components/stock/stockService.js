@@ -1,8 +1,9 @@
 import axios from 'axios';
 import logger from '../../middleware/logger.js';
+import Search from '../search/searchModel.js';
 import Stock from './stockModel.js';
 
-export const getOneStock = async (symbol) => {
+export const getOneStock = async (symbol, userId) => {
   logger.info('Inside getOneStock service');
   const askedStock = await Stock.findOne({ name: symbol });
 
@@ -28,9 +29,11 @@ export const getOneStock = async (symbol) => {
       weeklyData,
     });
     if (!currStock) return { err: "Couldn't find your stock", statusCode: 404 };
+
+    await Search.create({ stock: currStock, user: userId });
     return currStock;
   }
-
+  await Search.create({ stock: askedStock, user: userId });
   return askedStock;
 };
 
