@@ -12,8 +12,8 @@ const app = express();
 const __dirname = path.resolve();
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
-app.use(express.static(path.join(__dirname, 'src/public')));
+app.set('views', path.join(__dirname, 'src/frontend/views'));
+app.use(express.static(path.join(__dirname, 'src/frontend/public')));
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
