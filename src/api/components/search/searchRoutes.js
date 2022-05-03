@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authorizeTo, protectRoute } from '../../../middleware/auth.js';
+import { authorizeTo, protectRoute } from '../../middleware/auth.js';
 import { userSearchHistory } from './searchController.js';
 
 const router = Router();

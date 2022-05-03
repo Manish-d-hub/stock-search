@@ -1,6 +1,6 @@
-import logger from '../../../middleware/logger.js';
-import AppError from '../../../utils/AppError.js';
-import { catchAsync } from '../../../utils/catchAsync.js';
+import logger from '../../middleware/logger.js';
+import AppError from '../../utils/AppError.js';
+import { catchAsync } from '../../utils/catchAsync.js';
 import { getSearchHistory } from './searchService.js';
 
 export const userSearchHistory = catchAsync(async (req, res) => {

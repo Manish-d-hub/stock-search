@@ -1,6 +1,6 @@
-import logger from '../../../middleware/logger.js';
-import AppError from '../../../utils/AppError.js';
-import { catchAsync } from '../../../utils/catchAsync.js';
+import logger from '../../middleware/logger.js';
+import AppError from '../../utils/AppError.js';
+import { catchAsync } from '../../utils/catchAsync.js';
 import { getOneStock, upadteDbStocks } from './stockService.js';
 
 export const renderSearch = (req, res) => {

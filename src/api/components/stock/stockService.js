@@ -1,5 +1,5 @@
 import axios from 'axios';
-import logger from '../../../middleware/logger.js';
+import logger from '../../middleware/logger.js';
 import Search from '../search/searchModel.js';
 import Stock from './stockModel.js';
 

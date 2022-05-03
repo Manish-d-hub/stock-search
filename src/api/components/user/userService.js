@@ -1,4 +1,4 @@
-import logger from '../../../middleware/logger.js';
+import logger from '../../middleware/logger.js';
 import User from './userModel.js';
 
 export const createOneUser = async (email, password, passwordConfirm, role) => {

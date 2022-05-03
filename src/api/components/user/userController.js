@@ -1,7 +1,7 @@
-import { createSendToken } from '../../../middleware/auth.js';
-import logger from '../../../middleware/logger.js';
-import AppError from '../../../utils/AppError.js';
-import { catchAsync } from '../../../utils/catchAsync.js';
+import { createSendToken } from '../../middleware/auth.js';
+import logger from '../../middleware/logger.js';
+import AppError from '../../utils/AppError.js';
+import { catchAsync } from '../../utils/catchAsync.js';
 import { createOneUser, loginCurrUser } from './userService.js';
 
 export const renderRegister = (req, res) => {
