@@ -1,6 +1,6 @@
-import logger from '../../middleware/logger.js';
-import AppError from '../../utils/AppError.js';
-import { catchAsync } from '../../utils/catchAsync.js';
+import logger from '../../../middleware/logger.js';
+import AppError from '../../../utils/AppError.js';
+import { catchAsync } from '../../../utils/catchAsync.js';
 import { getOneStock, upadteDbStocks } from './stockService.js';
 
 export const renderSearch = (req, res) => {
@@ -11,7 +11,7 @@ export const renderSearch = (req, res) => {
 export const getStock = catchAsync(async (req, res) => {
   logger.info('Inside getStock controller');
   const { symbol } = req.query;
-  const {id} = req.user
+  const { id } = req.user;
   const stock = await getOneStock(symbol, id);
 
   if (stock.err) throw new AppError(stock.err, stock.statusCode);

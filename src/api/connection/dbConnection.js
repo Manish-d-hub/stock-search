@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import logger from '../middleware/logger.js';
+import logger from '../../middleware/logger.js';
 
 const DB = process.env.DATABASE.replace('<password>', process.env.DB_PASS);
 
