@@ -14,7 +14,7 @@ const logger = createLogger({
   transports: [
     new transports.Console({ level: 'debug', colorize: true }),
     new transports.File({
-      filename: './src/logs/app.log',
+      filename: './src/api/logs/app.log',
       level: 'debug',
       colorize: true,
     }),

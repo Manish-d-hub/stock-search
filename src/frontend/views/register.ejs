@@ -6,25 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/auth.css">
-  <title>User Login</title>
+  <title><%= title %></title>
 </head>
 
 <body>
   <div class="container">
     <div class="screen">
       <div class="screen__content">
-        <form class="login" action="/api/v1/user/login" method="POST">
-          <h1>Login</h1>
+        <form class="login" action="/api/v1/user/create-user" method="post">
+          <h1>Register</h1>
           <div class="login__field">
-            <i class="login__icon fas fa-user"></i>
-            <input type="text" class="login__input" placeholder="Email">
+            <input type="text" class="login__input" name="email" placeholder="Email">
           </div>
           <div class="login__field">
-            <i class="login__icon fas fa-lock"></i>
-            <input type="password" class="login__input" placeholder="Password">
+            <input type="password" class="login__input" name="password" placeholder="Password">
+          </div>
+          <div class="login__field">
+            <input type="password" class="login__input" name="passwordConfirm" placeholder="Confirm Password">
           </div>
           <button class="button login__submit">
-            <span class="button__text">Log In Now</span>
+            <span class="button__text">Sign Up Now</span>
             <i class="button__icon fas fa-chevron-right"></i>
           </button>
         </form>
