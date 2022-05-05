@@ -3,11 +3,6 @@ import AppError from '../../utils/AppError.js';
 import { catchAsync } from '../../utils/catchAsync.js';
 import { getOneStock, upadteDbStocks } from './stockService.js';
 
-export const renderSearch = (req, res) => {
-  logger.info('inside renderSearch controller');
-  res.render('search');
-};
-
 export const getStock = catchAsync(async (req, res) => {
   logger.info('Inside getStock controller');
   const { symbol } = req.query;

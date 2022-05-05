@@ -4,11 +4,6 @@ import AppError from '../../utils/AppError.js';
 import { catchAsync } from '../../utils/catchAsync.js';
 import { createOneUser, loginCurrUser } from './userService.js';
 
-export const renderRegister = (req, res) => {
-  logger.info('inside renderRegister controller');
-  res.render('register');
-};
-
 export const createUser = catchAsync(async (req, res) => {
   logger.info('inside createUser controller');
   const { email, password, passwordConfirm, role } = req.body;
@@ -18,11 +13,6 @@ export const createUser = catchAsync(async (req, res) => {
 
   createSendToken(newUser, 200, res);
 });
-
-export const renderlogin = (req, res) => {
-  logger.info('inside renderlogin controller');
-  res.render('login');
-};
 
 export const loginUser = catchAsync(async (req, res) => {
   logger.info('inside loginUser controller');
