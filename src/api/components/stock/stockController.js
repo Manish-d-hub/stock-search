@@ -1,3 +1,5 @@
+import cron from 'node-cron';
+
 import logger from '../../middleware/logger.js';
 import AppError from '../../utils/AppError.js';
 import { catchAsync } from '../../utils/catchAsync.js';
@@ -6,6 +8,7 @@ import { getOneStock, upadteDbStocks } from './stockService.js';
 export const getStock = catchAsync(async (req, res) => {
   logger.info('Inside getStock controller');
   const { symbol } = req.query;
+  console.log(symbol);
   const { id } = req.user;
   const stock = await getOneStock(symbol, id);
 
@@ -25,8 +28,7 @@ export const updateStock = catchAsync(async (req, res) => {
   if (updatedStock.err)
     throw new AppError(updatedStock.err, updatedStock.statusCode);
 
-  res.status(200).json({
-    status: 'success',
-    data: updatedStock,
-  });
+  logger.info('Stocks updated in DB');
 });
+
+cron.schedule('15 10 * * *', updateStock);
