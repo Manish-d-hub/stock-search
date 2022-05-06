@@ -1,5 +1,7 @@
 import { getOneStock } from '../api/components/stock/stockService.js';
 import logger from '../api/middleware/logger.js';
+import AppError from '../api/utils/AppError.js';
+import { catchAsync } from '../api/utils/catchAsync.js';
 
 export const renderRegister = (req, res) => {
   logger.info('inside renderRegister controller');
@@ -16,15 +18,24 @@ export const renderSearch = (req, res) => {
   res.render('search', { title: 'Stock search' });
 };
 
-export const getData = async (req, res) => {
+export const getData = catchAsync(async (req, res) => {
   logger.info('inside getData controller');
   const { symbol } = req.body;
   const { id } = req.user;
-  const stock = getOneStock(symbol, id);
+  const stock = await getOneStock(symbol.toUpperCase(), id);
 
   if (stock.err) throw new AppError(stock.err, stock.statusCode);
 
   const stockData = stock.weeklyData;
+  // return stockData
+  const dates = Object.keys(stockData[0]);
+  const prices = Object.values(stockData[0]);
 
-  console.log(stockData);
-};
+  res.render('chart', { title: 'Stock Chart', dates, prices });
+});
+
+
+// export const renderChart = (req, res) => {
+//   logger.info('inside renderChart controller');
+//   res.render('chart', { title: 'Stock chart' });
+// };
