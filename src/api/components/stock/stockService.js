@@ -8,20 +8,30 @@ export const getOneStock = async (symbol, userId) => {
   const askedStock = await Stock.findOne({ name: symbol });
 
   if (!askedStock) {
-    let weeklyData = [];
+    let prices = [];
+    let dates = [];
+
     const apiRes = await axios({
       method: 'GET',
       url: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`,
     });
 
     let stockData = apiRes.data['Time Series (Daily)'];
-    stockData = Object.values(stockData);
+    const stockDates = Object.keys(stockData);
+    const stockPrices = Object.values(stockData);
 
     for (let i = 0; i < 7; i++) {
-      weeklyData.push(stockData[i]['4. close']);
+      dates.push(stockDates[i]);
+      prices.push(stockPrices[i]['4. close']);
     }
 
-    const stockPrice = weeklyData[0];
+    prices = prices.map(Number);
+    let weeklyData = Object.assign.apply(
+      {},
+      dates.map((v, i) => ({ [v]: prices[i] }))
+    );
+
+    const stockPrice = prices[0];
 
     const currStock = await Stock.create({
       name: symbol,
