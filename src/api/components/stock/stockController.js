@@ -10,7 +10,7 @@ export const getStock = catchAsync(async (req, res) => {
   const { symbol } = req.query;
   console.log(symbol);
   const { id } = req.user;
-  const stock = await getOneStock(symbol, id);
+  const stock = await getOneStock(symbol.toUpperCase(), id);
 
   if (stock.err) throw new AppError(stock.err, stock.statusCode);
 
