@@ -9,12 +9,10 @@ import {
 
 const router = Router();
 
-// router.use(protectRoute);
 router.get('/register', renderRegister);
 router.get('/login', renderlogin);
 
-router.use(protectRoute);
-router.get('/search', renderSearch);
-router.post('/display-chart', getData);
+router.get('/search',protectRoute, renderSearch);
+router.post('/display-chart',protectRoute, getData);
 
 export { router as viewRouter };
