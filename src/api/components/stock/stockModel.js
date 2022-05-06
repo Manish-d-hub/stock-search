@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const stockSchema = new Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
-  weeklyData: [Number],
+  weeklyData: [],
 });
 
 const Stock = db.model('Stock', stockSchema);

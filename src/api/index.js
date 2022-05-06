@@ -7,15 +7,15 @@ import methodOverride from 'method-override';
 import globalErrorHandler from './middleware/errorHandler.js';
 import logger from './middleware/logger.js';
 import indexRouter from './components/router.js';
-import { viewRouter } from '../frontend/routes/viewRoute.js';
+import { viewRouter } from '../viewsRender/viewRoute.js';
 
 const app = express();
 
 const __dirname = path.resolve();
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/frontend/views'));
-app.use(express.static(path.join(__dirname, 'src/frontend/public')));
+app.set('views', path.join(__dirname, 'src/views'));
+app.use(express.static(path.join(__dirname, 'src/public')));
 
 // Body parser, reading data from body into req.body
 app.use(express.json());
