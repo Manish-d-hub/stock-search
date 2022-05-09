@@ -55,20 +55,32 @@ export const upadteDbStocks = async () => {
     return { err: "Stocks dosen't exist in your database", statusCode: 404 };
 
   for (let i = 0; i < stocks.length; i++) {
-    let weeklyData = stocks[i].weeklyData;
+    let weeklyData = stocks[i].weeklyData[0];
 
     const apiRes = await axios({
       method: 'GET',
       url: `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stocks[i].name}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`,
     });
 
-    const stockPrice = apiRes.data['Global Quote']['05. price'];
-    weeklyData.pop();
-    weeklyData.unshift(stockPrice);
+    const updatedStockPrice = apiRes.data['Global Quote']['05. price'];
+    const updatedDate = apiRes.data['Global Quote']['07. latest trading day'];
+
+    let dates = Object.keys(weeklyData);
+    let prices = Object.values(weeklyData);
+
+    dates.pop();
+    dates.unshift(updatedDate);
+    prices.pop();
+    prices.unshift(Number(updatedStockPrice));
+
+    weeklyData = Object.assign.apply(
+      {},
+      dates.map((v, i) => ({ [v]: prices[i] }))
+    );
 
     const stock = await Stock.updateOne(
       { name: stocks[i].name },
-      { price: stockPrice, weeklyData }
+      { price: updatedStockPrice, weeklyData }
     );
 
     if (!stock) return { err: "Couldn't find your stock", statusCode: 404 };
