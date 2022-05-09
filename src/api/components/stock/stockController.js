@@ -8,7 +8,6 @@ import { getOneStock, upadteDbStocks } from './stockService.js';
 export const getStock = catchAsync(async (req, res) => {
   logger.info('Inside getStock controller');
   const { symbol } = req.query;
-  console.log(symbol);
   const { id } = req.user;
   const stock = await getOneStock(symbol.toUpperCase(), id);
 
